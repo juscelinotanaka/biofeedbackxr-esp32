@@ -36,8 +36,20 @@ set(unowifi.upload.speed 9600)
 ## Verbose build process
 set(${PROJECT_NAME}_AFLAGS -v)
 
+set(LIB_PATHS "/Users/jtanaka/Documents/Arduino/libraries/TFT_eSPI" "/Any/Other/Path")
+
+function(set_custom_libs)
+ set(TMP "")
+ foreach(arg IN LISTS ARGV)
+  set(TMP "${TMP} -I\"${arg}\"")
+ endforeach()
+ set(CUSTOM_LIBS "${TMP}" PARENT_SCOPE)
+endfunction()
+
+set_custom_libs(${LIB_PATHS})
+
 generate_arduino_firmware(${PROJECT_NAME})
 
 
-print_board_list()
-print_programmer_list()
+#print_board_list()
+#print_programmer_list()

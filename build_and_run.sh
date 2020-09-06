@@ -12,7 +12,7 @@ INSTALL_LINK=https://arduino.github.io/arduino-cli/latest/installation/
 # TODO: create a setup flow
 # TODO: handle dependencies
 
-if [ "$1" == "install" ]; then
+if [[ "$1" == "install" ]]; then
   echo "$OSTYPE";
   if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     curl -fsSL https://raw.githubusercontent.com/arduino/arduino-cli/master/install.sh | sh
@@ -33,7 +33,7 @@ if [ "$1" == "install" ]; then
     echo "Please check Android-CLI website: $INSTALL_LINK"
   fi
 
-elif [ "$1" == "setup" ]; then
+elif [[ "$1" == "setup" ]]; then
   echo "Setting up project"
   arduino-cli config init
   arduino-cli core update-index

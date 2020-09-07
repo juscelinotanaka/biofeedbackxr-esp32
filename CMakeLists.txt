@@ -38,7 +38,7 @@ set(${PROJECT_NAME}_AFLAGS -v)
 
 set(LIB_PATHS
         "/Users/jtanaka/Documents/Arduino/libraries/TFT_eSPI"
-        "/Users/jtanaka//Library/Arduino15/packages/esp32/hardware/esp32/1.0.4/libraries/BLE/src/"
+        "/Users/jtanaka/Library/Arduino15/packages/esp32/hardware/esp32/1.0.4/libraries/BLE/"
         )
 
 function(set_custom_libs)

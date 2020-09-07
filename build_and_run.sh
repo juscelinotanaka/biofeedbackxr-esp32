@@ -40,6 +40,10 @@ elif [[ "$1" == "setup" ]]; then
   # TODO: find a way to change config file and add ESP32 board
   arduino-cli core install $BOARD_NAME
 
+elif [[ "$1" == "build" ]]; then
+  echo "arduino-cli compile --fqbn $FQBN $SKETCH"
+  arduino-cli compile --fqbn $FQBN $SKETCH
+
 elif [ -z "$1" ]; then # check if there is no arguments
 
   arduino-cli compile --fqbn $FQBN $SKETCH

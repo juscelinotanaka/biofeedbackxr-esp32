@@ -8,14 +8,14 @@ set(${PROJECT_NAME}_BOARD unowifi)
 project(${PROJECT_NAME})
 
 # Define additional source and header files or default arduino sketch files
-# set(${PROJECT_NAME}_SRCS)
-# set(${PROJECT_NAME}_HDRS)
+set(${PROJECT_NAME}_SRCS bio_feedback_xr.ino BluetoothService.cpp DisplayManager.cpp ConnectionCallbacks.cpp)
+set(${PROJECT_NAME}_HDRS BluetoothService.h DisplayManager.h)
 
 ### Additional static libraries to include in the target.
 # set(${PROJECT_NAME}_LIBS)
 
 ### Main sketch file
-set(${PROJECT_NAME}_SKETCH bio_feedback_xr.ino)
+# set(${PROJECT_NAME}_SKETCH bio_feedback_xr.ino)
 
 ### Add project directories into the build
 # add_subdirectory()
@@ -38,8 +38,10 @@ set(${PROJECT_NAME}_AFLAGS -v)
 
 set(LIB_PATHS
         "/Users/jtanaka/Documents/Arduino/libraries/TFT_eSPI"
-        "/Users/jtanaka/Library/Arduino15/packages/esp32/hardware/esp32/1.0.4/libraries/BLE/"
+        "/Users/jtanaka/Library/Arduino15/packages/esp32/hardware/esp32/1.0.4/libraries/BLE/src/"
         )
+
+add_compile_definitions(CONFIG_BT_ENABLED)
 
 function(set_custom_libs)
  set(TMP "")

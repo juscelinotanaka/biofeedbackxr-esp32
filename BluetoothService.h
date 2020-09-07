@@ -13,7 +13,7 @@
 #include <BLE2902.h>
 #include <TFT_eSPI.h>
 
-#include "MyServerCallbacks.h"
+#include "ConnectionCallbacks.h"
 
 // See the following for generating UUIDs:
 // https://www.uuidgenerator.net/
@@ -32,9 +32,9 @@ public:
     uint8_t txValue = 41;
 
     void update();
+    ConnectionCallbacks serverCallbacks = ConnectionCallbacks(&deviceConnected);
 
 private:
-
     class CharacteristicCallback: public BLECharacteristicCallbacks {
         void onWrite(BLECharacteristic *pCharacteristic) {
             std::string rxValue = pCharacteristic->getValue();

@@ -2,8 +2,8 @@
 // Created by Juscelino Tanaka on 06/09/20.
 //
 
-#ifndef BIO_FEEDBACK_XR_MYSERVERCALLBACKS_H
-#define BIO_FEEDBACK_XR_MYSERVERCALLBACKS_H
+#ifndef BIO_FEEDBACK_XR_CONNECTIONCALLBACKS_H
+#define BIO_FEEDBACK_XR_CONNECTIONCALLBACKS_H
 
 #include <BLEDevice.h>
 #include <BLEServer.h>
@@ -11,9 +11,9 @@
 #include <BLE2902.h>
 #include <TFT_eSPI.h>
 
-class MyServerCallbacks: public BLEServerCallbacks {
+class ConnectionCallbacks: public BLEServerCallbacks {
 public:
-    MyServerCallbacks(bool * variable);
+    ConnectionCallbacks(bool * variable);
 
 private:
     bool * deviceConnected;
@@ -22,4 +22,4 @@ private:
 };
 
 
-#endif //BIO_FEEDBACK_XR_MYSERVERCALLBACKS_H
+#endif //BIO_FEEDBACK_XR_CONNECTIONCALLBACKS_H

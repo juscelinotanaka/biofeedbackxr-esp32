@@ -12,7 +12,7 @@ void BluetoothService::setup() {
 
     // Create the BLE Server
     pServer = BLEDevice::createServer();
-    pServer->setCallbacks(new MyServerCallbacks(&deviceConnected));
+    pServer->setCallbacks(&serverCallbacks);
 
     // Create the BLE Service
     BLEService *pService = pServer->createService(SERVICE_UUID);

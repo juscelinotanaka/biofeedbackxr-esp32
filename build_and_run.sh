@@ -7,6 +7,7 @@ SKETCH=bio_feedback_xr
 PORT=/dev/cu.SLAB_USBtoUART
 
 INSTALL_LINK=https://arduino.github.io/arduino-cli/latest/installation/
+BOARD_URL=https://dl.espressif.com/dl/package_esp32_index.json
 
 # TODO: create a android-cli install flow
 # TODO: create a setup flow
@@ -36,9 +37,11 @@ if [[ "$1" == "install" ]]; then
 elif [[ "$1" == "setup" ]]; then
   echo "Setting up project"
   arduino-cli config init
-  arduino-cli core update-index
-  # TODO: find a way to change config file and add ESP32 board
-  arduino-cli core install $BOARD_NAME
+  # install libs
+  arduino-cli lib install TFT_eSPI
+  arduino-cli  core update-index --additional-urls $BOARD_URL
+  # TODO: check if it really works, otherwise it will be needed to add the URL on the config file
+  arduino-cli core install --additional-urls $BOARD_URL $BOARD_NAME
 
 elif [[ "$1" == "build" ]]; then
   echo "arduino-cli compile --fqbn $FQBN $SKETCH"

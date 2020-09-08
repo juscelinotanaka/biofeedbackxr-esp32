@@ -42,7 +42,12 @@ void BluetoothService::setup() {
 
 void BluetoothService::update(unsigned long time) {
     if (time >= lastUpdate + delayTime && deviceConnected) {
-        pTxCharacteristic->setValue(txData, dataSize);
+        data[0] = (time >> 24) & 0xFF;
+        data[1] = (time >> 16) & 0xFF;
+        data[2] = (time >> 8) & 0xFF;
+        data[3] = time & 0xFF;
+
+        pTxCharacteristic->setValue(ptrData, dataSize);
         pTxCharacteristic->notify();
 
         lastUpdate = time;
@@ -65,4 +70,12 @@ void BluetoothService::update(unsigned long time) {
 
 void BluetoothService::registerDeviceConnected(void (*f)(bool)) {
     serverCallbacks.registerCallback(f);
+}
+
+void BluetoothService::setData(uint16_t ecg, uint16_t emg) {
+    data[4] = (ecg >> 8) & 0xFF;
+    data[5] = ecg & 0xFF;
+
+    data[6] = (emg >> 8) & 0xFF;
+    data[7] = emg & 0xFF;
 }

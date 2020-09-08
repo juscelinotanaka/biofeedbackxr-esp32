@@ -26,6 +26,7 @@ class BluetoothService {
 public:
     void setup();
     void update(unsigned long time);
+    void setData(uint16_t ecg, uint16_t emg);
     void registerDeviceConnected(void (*f)(bool));
 
 private:
@@ -38,9 +39,10 @@ private:
     bool deviceConnected = false;
     bool oldDeviceConnected = false;
 
-    static const size_t dataSize = 4;
-    uint8_t data[dataSize] = {1, 2, 4, 8};
-    uint8_t * txData = data;
+    static const size_t dataSize = 8;
+    uint8_t data[dataSize];
+    uint8_t * ptrData = data;
+
     unsigned long lastUpdate = 0;
 
     //TODO: move this to an independent file

@@ -25,6 +25,7 @@ void loop() {
     now = millis();
     display.printPage();
 
+    bleService.setData(0xFF, 0xEE);
     // BLE service needs to be latest because it'll delay to prevent flooding BLE service
     // TODO: make it not lock main thread
     bleService.update(now);

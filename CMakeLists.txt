@@ -8,8 +8,9 @@ set(${PROJECT_NAME}_BOARD unowifi)
 project(${PROJECT_NAME})
 
 # Define additional source and header files or default arduino sketch files
-set(${PROJECT_NAME}_SRCS bio_feedback_xr.ino BluetoothService.cpp DisplayManager.cpp ConnectionCallbacks.cpp)
-set(${PROJECT_NAME}_HDRS BluetoothService.h DisplayManager.h)
+set(${PROJECT_NAME}_SRCS bio_feedback_xr.ino BluetoothService.cpp DisplayManager.cpp ConnectionCallbacks.cpp
+        ECGReader.cpp)
+set(${PROJECT_NAME}_HDRS BluetoothService.h DisplayManager.h ECGReader.h)
 
 ### Additional static libraries to include in the target.
 # set(${PROJECT_NAME}_LIBS)

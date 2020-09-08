@@ -15,7 +15,6 @@ ECGReader ecgReader = ECGReader(ecgPlusPin, ecgMinusPin, ecgAnalogPin);
 void onDeviceConnected(bool);
 
 void setup(void) {
-    randomSeed(analogRead(0)*analogRead(1));
     display.init();
     display.initialMessage();
 

@@ -19,9 +19,9 @@ void DisplayManager::initialMessage() {
     fillScreen();
 }
 
-void DisplayManager::setTime(unsigned long i)
+void DisplayManager::setClientConnected(bool connected)
 {
-    currentTime = i;
+    currentTime = connected;
 }
 
 void DisplayManager::printPage() {
@@ -38,6 +38,7 @@ void DisplayManager::printPage() {
 
     // We can now plot text on screen using the "print" class
     tft.println("BioFeedback XR");
+
     // reset text size to 1
     tft.setTextSize(1);
     tft.println();
@@ -53,8 +54,8 @@ void DisplayManager::printPage() {
     tft.setTextColor(TFT_YELLOW, TFT_BLACK);
     // set to font 7
     tft.setTextFont(2);
-    tft.print("Value: ");
-    tft.println(currentTime);
+    tft.print("Connected: ");
+    tft.println(currentTime ? "True" : "False");
 
     // Set the font colour to be green with black background, set to font 2
     tft.setTextColor(TFT_GREEN,TFT_BLACK);

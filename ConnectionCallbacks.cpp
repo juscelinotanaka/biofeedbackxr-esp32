@@ -4,14 +4,26 @@
 
 #include "ConnectionCallbacks.h"
 
-ConnectionCallbacks::ConnectionCallbacks(bool *variable) {
-    deviceConnected = variable;
+ConnectionCallbacks::ConnectionCallbacks(bool * refConnected) {
+    connectedReference = refConnected;
 }
 
 void ConnectionCallbacks::onConnect(BLEServer* pServer) {
-    *deviceConnected = true;
+    *connectedReference = true;
+
+    if (callback != nullptr) {
+        callback(true);
+    }
 }
 
 void ConnectionCallbacks::onDisconnect(BLEServer* pServer) {
-    *deviceConnected = false;
+    *connectedReference = false;
+
+    if (callback != nullptr) {
+        callback(false);
+    }
+}
+
+void ConnectionCallbacks::registerCallback(void (*f)(bool)) {
+    callback = f;
 }

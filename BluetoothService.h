@@ -25,16 +25,22 @@
 class BluetoothService {
 public:
     void setup();
+    void update(unsigned long time);
+    void registerDeviceConnected(void (*f)(bool));
+
+private:
+    const unsigned long delayTime = 10;
+
+    ConnectionCallbacks serverCallbacks = ConnectionCallbacks(&deviceConnected);
+
     BLEServer *pServer = NULL;
     BLECharacteristic * pTxCharacteristic;
     bool deviceConnected = false;
     bool oldDeviceConnected = false;
     uint8_t txValue = 41;
+    unsigned long lastUpdate = 0;
 
-    void update();
-    ConnectionCallbacks serverCallbacks = ConnectionCallbacks(&deviceConnected);
-
-private:
+    //TODO: move this to an independent file
     class CharacteristicCallback: public BLECharacteristicCallbacks {
         void onWrite(BLECharacteristic *pCharacteristic) {
             std::string rxValue = pCharacteristic->getValue();

@@ -5,11 +5,6 @@
 #ifndef BIO_FEEDBACK_XR_DISPLAYMANAGER_H
 #define BIO_FEEDBACK_XR_DISPLAYMANAGER_H
 
-#define BLACK 0x0000
-#define WHITE 0xFFFF
-#define GREY  0x5AEB
-
-//#include <TFT_eSPI.h> // Graphics and font library for ST7735 driver chip
 #include <SPI.h>
 #include <TFT_eSPI.h>
 
@@ -21,6 +16,13 @@ static uint8_t conv2d(const char* p) {
 }
 
 class DisplayManager {
+public:
+    void init();
+    void initialMessage();
+    void setClientConnected(bool connected);
+    void printPage();
+    void fillScreen();
+
 private:
     int16_t h = 135;
     int16_t w = 240;
@@ -29,15 +31,7 @@ private:
     String hh = String(conv2d(__TIME__));
     String mm = String(conv2d(__TIME__+3));
     String buildString = String("Build: 0." + hh + "." + mm);
-
-
-public:
     TFT_eSPI tft = TFT_eSPI(h, w);
-    void init();
-    void initialMessage();
-    void setTime(unsigned long i);
-    void printPage();
-    void fillScreen();
 };
 
 

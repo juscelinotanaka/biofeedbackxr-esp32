@@ -13,10 +13,12 @@
 
 class ConnectionCallbacks: public BLEServerCallbacks {
 public:
-    ConnectionCallbacks(bool * variable);
+    explicit ConnectionCallbacks(bool *);
+    void registerCallback(void (*f)(bool));
 
 private:
-    bool * deviceConnected;
+    void (*callback)(bool);
+    bool * connectedReference;
     void onConnect(BLEServer* pServer);
     void onDisconnect(BLEServer* pServer);
 };

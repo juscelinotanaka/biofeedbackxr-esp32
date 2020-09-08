@@ -40,15 +40,20 @@ void BluetoothService::setup() {
     Serial.println("Waiting a client connection to notify...");
 }
 
-void BluetoothService::update() {
-    if (deviceConnected) {
+void BluetoothService::update(unsigned long time) {
+    Serial.print("T: ");
+    Serial.println(time);
+    Serial.println(lastUpdate);
+    Serial.println(deviceConnected);
+
+    if (time >= lastUpdate + delayTime && deviceConnected) {
         pTxCharacteristic->setValue(&txValue, 1);
         pTxCharacteristic->notify();
         txValue++;
         if (txValue > 126)
             txValue = 41;
 
-        delay(10); // bluetooth stack will go into congestion, if too many packets are sent
+        lastUpdate = time;
     }
 
     // disconnecting
@@ -58,9 +63,14 @@ void BluetoothService::update() {
         Serial.println("start advertising");
         oldDeviceConnected = deviceConnected;
     }
+
     // connecting
     if (deviceConnected && !oldDeviceConnected) {
         // do stuff here on connecting
         oldDeviceConnected = deviceConnected;
     }
+}
+
+void BluetoothService::registerDeviceConnected(void (*f)(bool)) {
+    serverCallbacks.registerCallback(f);
 }

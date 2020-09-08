@@ -26,7 +26,7 @@ class BluetoothService {
 public:
     void setup();
     void update(unsigned long time);
-    void setData(uint16_t ecg, uint16_t emg);
+    void setData(uint16_t, uint16_t);
     void registerDeviceConnected(void (*f)(bool));
 
 private:

@@ -41,17 +41,9 @@ void BluetoothService::setup() {
 }
 
 void BluetoothService::update(unsigned long time) {
-    Serial.print("T: ");
-    Serial.println(time);
-    Serial.println(lastUpdate);
-    Serial.println(deviceConnected);
-
     if (time >= lastUpdate + delayTime && deviceConnected) {
-        pTxCharacteristic->setValue(&txValue, 1);
+        pTxCharacteristic->setValue(txData, dataSize);
         pTxCharacteristic->notify();
-        txValue++;
-        if (txValue > 126)
-            txValue = 41;
 
         lastUpdate = time;
     }

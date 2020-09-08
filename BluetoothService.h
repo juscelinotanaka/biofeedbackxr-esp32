@@ -37,7 +37,10 @@ private:
     BLECharacteristic * pTxCharacteristic;
     bool deviceConnected = false;
     bool oldDeviceConnected = false;
-    uint8_t txValue = 41;
+
+    static const size_t dataSize = 4;
+    uint8_t data[dataSize] = {1, 2, 4, 8};
+    uint8_t * txData = data;
     unsigned long lastUpdate = 0;
 
     //TODO: move this to an independent file

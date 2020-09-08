@@ -21,6 +21,7 @@ void setup(void) {
     ecgReader.setup();
 
     bleService.setup();
+    bleService.registerDeviceConnected(&onDeviceConnected);
 }
 
 void onDeviceConnected(bool connected) {

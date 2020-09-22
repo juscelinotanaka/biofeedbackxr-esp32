@@ -30,13 +30,16 @@ void onDeviceConnected(bool connected) {
 
 void loop() {
     now = millis();
-    display.printPage();
-
-    // ECG
-    ecgReader.update(now);
-
-    //TODO: make a condition to know when BLE Service is about to dispatch, then read data only when it will send
-    // and update display by there as well
-    bleService.setData(ecgReader.getValue(), 0xEE);
     bleService.update(now);
+
+    if (bleService.willDispatch(now)) {
+        // ECG
+        ecgReader.update(now);
+        uint16_t ecgValue = ecgReader.getValue();
+
+        bleService.setData(ecgValue, 0xEE);
+        bleService.dispatch(now);
+
+        display.printPage();
+    }
 }

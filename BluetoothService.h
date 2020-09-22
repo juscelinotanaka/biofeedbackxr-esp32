@@ -25,9 +25,37 @@
 class BluetoothService {
 public:
     void setup();
+
+    /**
+     * Pack the data (time + ECG data + EMG data) and notify it if enough time has passed after the previous
+     * dispatch. Ypi cam ise willDispatch to check if a dispatch will happen or not by a specific time (preferably now)
+     * @param time in millis
+     */
+    void dispatch(unsigned long time);
+
+    /**
+     * Check whether a device disconnected or connected
+     * @param time in millis
+     */
     void update(unsigned long time);
+
+    /**
+     * Sets the data for ECG and EMG devices which will be sent during update
+     */
     void setData(uint16_t, uint16_t);
+
+    /**
+     * Register a callback to know when a device was connected or not
+     * @param f A void function(bool) delegate
+     */
     void registerDeviceConnected(void (*f)(bool));
+
+    /**
+     * Check whether the bluetooth service will dispatch/sync data at the given time or not. E.g. it can be used
+     * to check if it will dispatch events now or in a future time.
+     * @return true if time >= lastUpdate + delayTime
+     */
+    bool willDispatch(unsigned long);
 
 private:
     const unsigned long delayTime = 10;
